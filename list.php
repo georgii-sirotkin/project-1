@@ -17,7 +17,7 @@ require_once('partials/header.php');
     <ul class="mt-3">
 <?php
     foreach ($books as $book) {
-        echo "<li><a href='buy.php?book_id={$book['id']}'><strong>{$book['name']}</strong> by {$book['first_name']} {$book['last_name']} ({$book['quantity']} items)</a></li>";
+        echo "<li><a href='checkout.php?book_id={$book['id']}'><strong>{$book['name']}</strong> by {$book['first_name']} {$book['last_name']} ({$book['quantity']} items)</a></li>";
     }
 ?>
     </ul>

@@ -7,7 +7,7 @@ function getDatabaseHandler() {
         return $dbh;
     }
 
-    $dsn = 'mysql:dbname=project1;host=localhost;port=33060';
+    $dsn = 'mysql:dbname=project1;host=localhost';
     $user = 'homestead';
     $password = 'secret';
     $dbh = new PDO($dsn, $user, $password);

@@ -6,11 +6,15 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     processFormData();
 } else {
+    if (!empty($_GET['book_id'])) {
+        $_SESSION['book_id'] = (int)$_GET['book_id'];
+    }
+
     displayCheckoutForm();
 }
 
 function displayCheckoutForm($errors = []) {
-    $bookId = isset($_SESSION['book_id']) ? (int)$_SESSION['book_id'] : null;
+    $bookId = isset($_SESSION['book_id']) ? $_SESSION['book_id'] : null;
     $book = null;
 
     try {
