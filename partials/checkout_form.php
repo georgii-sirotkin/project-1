@@ -10,6 +10,7 @@ if (!$book) {
         <hr>
         <form method="POST">
             <h6 class="mb-2">Billing address</h6>
+            <input type="hidden" name="bookId" value="<?php echo $book['id'];?>">
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName">First name</label>

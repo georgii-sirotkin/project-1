@@ -4,8 +4,9 @@ require_once('helpers.php');
 
 try {
     $dbh = getDatabaseHandler();
-    $sql = 'SELECT BookInventory.id, name, quantity, Authors.first_name, Authors.last_name';
-    $sql .= ' FROM BookInventory JOIN Authors ON author_id = Authors.id';
+    $sql = 'SELECT BookInventory.id, name, quantity, Authors.first_name, Authors.last_name ';
+    $sql .= 'FROM BookInventory JOIN Authors ON author_id = Authors.id ';
+    $sql .= 'WHERE quantity > 0';
     $books = $dbh->query($sql);
 } catch (PDOException $e) {
     echo 'Database error: ' . $e->getMessage();

@@ -26,12 +26,19 @@ function displayCheckoutForm($errors = []) {
 }
 
 function processFormData() {
-    $errors = validate($_POST);
+    $data = $_POST;
+    $errors = validate($data);
 
     if (count($errors) > 0) {
         displayCheckoutForm($errors);
         return;
     }
+
+    $customerId = createCustomer($data['firstName'], $data['lastName']);
+    $creditCardId = createCreditCard($data['cardNumber'], $data['cardHolderName'], $data['expiration'], $data['cvv']);
+    $bookId = (int)$data['bookId'];
+    createOrder($bookId, $customerId, $creditCardId, 1);
+    decreaseQuantity($bookId, 1);
 }
 
 function validate($data) {
