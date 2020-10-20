@@ -39,6 +39,7 @@ function processFormData() {
     $bookId = (int)$data['bookId'];
     createOrder($bookId, $customerId, $creditCardId, 1);
     decreaseQuantity($bookId, 1);
+    displaySuccessPage();
 }
 
 function validate($data) {
@@ -77,3 +78,8 @@ function validate($data) {
     return $errors;
 }
 
+function displaySuccessPage() {
+    require_once('partials/header.php');
+    require_once('partials/success.php');
+    require_once('partials/footer.php');
+}
