@@ -8,7 +8,7 @@ try {
     $sql .= ' FROM BookInventory JOIN Authors ON author_id = Authors.id';
     $books = $dbh->query($sql);
 } catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
+    echo 'Database error: ' . $e->getMessage();
 }
 
 require_once('partials/header.php');
