@@ -7,6 +7,28 @@ CREATE TABLE Authors (
 CREATE TABLE BookInventory (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  author_id VARCHAR(255) NOT NULL,
+  author_id INT NOT NULL,
+  quantity INT NOT NULL
+);
+
+CREATE TABLE Customers (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE CreditCards (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  number VARCHAR(25) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  expiration CHAR(5) NOT NULL,
+  cvv CHAR(3) NOT NULL
+);
+
+CREATE TABLE Orders (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  book_id INT NOT NULL,
+  customer_id INT NOT NULL,
+  credit_card_id INT NOT NULL,
   quantity INT NOT NULL
 );

@@ -102,7 +102,7 @@ if (!$book) {
                     ?>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Place order</button>
+            <button type="submit" class="mt-2 btn btn-primary">Place order</button>
         </form>
     </div>
 <?php
