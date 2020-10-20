@@ -9,12 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     displayCheckoutForm();
 }
 
-function displayCheckoutForm() {
-    $bookId = (int)$_SESSION['book_id'];
+function displayCheckoutForm($errors = []) {
+    $bookId = isset($_SESSION['book_id']) ? (int)$_SESSION['book_id'] : null;
     $book = null;
 
     try {
-        $book = getBookById($bookId);
+        $book = $bookId ? getBookById($bookId) : null;
     } catch (PDOException $e) {
         echo 'Database error: ' . $e->getMessage();
         exit();
@@ -26,6 +26,47 @@ function displayCheckoutForm() {
 }
 
 function processFormData() {
+    $errors = validate($_POST);
 
+    if (count($errors) > 0) {
+        displayCheckoutForm($errors);
+        return;
+    }
+}
+
+function validate($data) {
+    $errors = [];
+
+    if (empty($data['firstName'])) {
+        $errors['firstName'] = 'First name is required';
+    }
+
+    if (empty($data['lastName'])) {
+        $errors['lastName'] = 'Last name is required';
+    }
+
+    if (empty($data['paymentMethod']) || !in_array($data['paymentMethod'], ['debit', 'credit'])) {
+        $errors['paymentMethod'] = 'Specify payment method.';
+    }
+
+    if (empty($data['cardHolderName'])) {
+        $errors['cardHolderName'] = 'Card holder name is required';
+    }
+
+    if (empty($data['cardNumber'])) {
+        $errors['cardNumber'] = 'Card number is required';
+    } elseif (!ctype_digit($data['cardNumber'])) {
+        $errors['cardNumber'] = 'Invalid card number';
+    }
+
+    if (empty($data['expiration'])) {
+        $errors['expiration'] = 'Expiration date is required';
+    }
+
+    if (empty($data['cvv'])) {
+        $errors['cvv'] = 'Security code required';
+    }
+
+    return $errors;
 }
 
